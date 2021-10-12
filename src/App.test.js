@@ -24,3 +24,30 @@ describe("La direccion debe ser correcta", () => {
         expect(girarIzq("E")).toEqual("N");
     });
 });
+
+function girarDer(orientacionInicial) {
+    if (orientacionInicial == "N")
+        return "E";
+    else if (orientacionInicial == "O")
+        return "N";
+    else if (orientacionInicial == "S")
+        return "O";
+    else if (orientacionInicial == "E")
+        return "S";
+
+}
+
+describe("La direccion debe ser correcta", () => {
+    it("Debe girar a la der correctamente", () => {
+        expect(girarDer("N")).toEqual("E");
+    });
+    it("Debe girar a la der correctamente", () => {
+        expect(girarDer("O")).toEqual("N");
+    });
+    it("Debe girar a la der correctamente", () => {
+        expect(girarDer("S")).toEqual("O");
+    });
+    it("Debe girar a la der correctamente", () => {
+        expect(girarDer("E")).toEqual("S");
+    });
+});

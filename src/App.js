@@ -16,7 +16,6 @@ function myFunction() {
 
 function fixOrientacion(posicionInicial) {
     return posicionInicial[1].slice(0, -1);
-
 }
 
 function separarSlash(str, separador) {
