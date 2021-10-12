@@ -64,10 +64,22 @@ function avanzar(posicionInicial, orientacion, mapa) {
     else if (orientacion == "E")
         mov = [1, 0];
     res = [posicionInicial[0] + mov[0], posicionInicial[1] + mov[1]];
+    if (res[0] < 0)
+        res[0] = 0;
+    if (res[0] > mapa[0])
+        res[0] = mapa[0];
+
+    if (res[1] < 0)
+        res[1] = 0;
+    if (res[1] > mapa[1])
+        res[1] = mapa[1];
+
     return res;
 }
 describe("Avanzar debe funcionar correctamente", () => {
     var posicionInicial = [3, 3];
+    var posicionInicialExtrema = [0, 0];
+    var posicionInicialExtrema2 = [5, 5];
     var mapa = [5, 5];
     var posicionNorte = [3, 4];
     it("Debe avanzar correctamente al norte", () => {
@@ -85,4 +97,18 @@ describe("Avanzar debe funcionar correctamente", () => {
     it("Debe avanzar correctamente al oeste", () => {
         expect(avanzar(posicionInicial, 'O', mapa)).toEqual(posicionOeste);
     });
+    //----------------------------------------------------------------------
+    it("Debe avanzar correctamente al norte sin salir del borde", () => {
+        expect(avanzar(posicionInicialExtrema2, 'N', mapa)).toEqual(mapa);
+    });
+    it("Debe avanzar correctamente al sur sin salir del borde", () => {
+        expect(avanzar(posicionInicialExtrema, 'S', mapa)).toEqual(posicionInicialExtrema);
+    });
+    it("Debe avanzar correctamente al este sin salir del borde", () => {
+        expect(avanzar(posicionInicialExtrema2, 'E', mapa)).toEqual(mapa);
+    });
+    it("Debe avanzar correctamente al oeste sin salir del borde", () => {
+        expect(avanzar(posicionInicialExtrema, 'O', mapa)).toEqual(posicionInicialExtrema);
+    });
+
 });
