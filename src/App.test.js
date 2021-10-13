@@ -112,3 +112,38 @@ describe("Avanzar debe funcionar correctamente", () => {
     });
 
 });
+
+function moverAuto(posicionInicial, orientacion, mapa, movimientos) {
+    for (var x = 0; x < movimientos.length; x++) {
+        if (movimientos.charAt(x) == "D")
+            orientacion = girarDer(orientacion);
+        if (movimientos.charAt(x) == "I")
+            orientacion = girarIzq(orientacion);
+        if (movimientos.charAt(x) == "A")
+            posicionInicial = avanzar(posicionInicial, orientacion, mapa);
+
+    }
+    return posicionInicial;
+}
+describe("El punto final del coche debe ser correcta", () => {
+    var posicion1 = [0, 0];
+    var posicion2 = [2, 2];
+    var posicion3 = [5, 5];
+    var posicion4 = [7, 7];
+    var resultado1 = [0, 3];
+    var resultado2 = [3, 3];
+    var resultado3 = [7, 6];
+    var resultado4 = [0, 0];
+    it("Debe llegar a su destino correcto", () => {
+        expect(moverAuto(posicion1, 'N', posicion3, 'AAA')).toEqual(resultado1);
+    });
+    it("Debe llegar a su destino correcto", () => {
+        expect(moverAuto(posicion2, 'S', posicion3, 'IAIA')).toEqual(resultado2);
+    });
+    it("Debe llegar a su destino correcto", () => {
+        expect(moverAuto(posicion3, 'E', posicion4, 'AAAAAIA')).toEqual(resultado3);
+    });
+    it("Debe llegar a su destino correcto", () => {
+        expect(moverAuto(posicion1, 'O', posicion4, 'AAAAAAA')).toEqual(resultado4);
+    });
+});
