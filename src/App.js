@@ -16,7 +16,7 @@ function myFunction() {
     posicionInicial[0] = parseInt(posicionInicial[0]);
     posicionInicial[1] = parseInt(posicionInicial[1]);
 
-    alert(moverAuto(posicionInicial, orientacion, tamGrid, direcciones));
+    alert(moverAuto(posicionInicial, orientacion, tamGrid, direcciones) + ' ' + girarAuto(posicionInicial, orientacion, tamGrid, direcciones));
     //+ " " + posicionInicial + " " + tamGrid
 }
 
@@ -101,5 +101,18 @@ function moverAuto(posicionInicial, orientacion, mapa, movimientos) {
 
     }
     return posicionInicial;
+}
+
+function girarAuto(posicionInicial, orientacion, mapa, movimientos) {
+    for (var x = 0; x < movimientos.length; x++) {
+        if (movimientos.charAt(x) == "D")
+            orientacion = girarDer(orientacion);
+        if (movimientos.charAt(x) == "I")
+            orientacion = girarIzq(orientacion);
+        if (movimientos.charAt(x) == "A")
+            posicionInicial = avanzar(posicionInicial, orientacion, mapa);
+
+    }
+    return orientacion;
 }
 //export default myFunction;
