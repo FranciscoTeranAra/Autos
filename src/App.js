@@ -15,8 +15,13 @@ function myFunction() {
 
     posicionInicial[0] = parseInt(posicionInicial[0]);
     posicionInicial[1] = parseInt(posicionInicial[1]);
+    var posicionFinal = moverAuto(posicionInicial, orientacion, tamGrid, direcciones);
+    var orientacionFinal = girarAuto(posicionInicial, orientacion, tamGrid, direcciones);
+    //alert(posicionFinal[0] + ',' + posicionFinal[1] + ' ' + orientacionFinal)
+    document.getElementById("posicion_inicial").innerHTML = "Posicion Inicial:" + posicionInicial[0] + ',' + posicionInicial[1] + ' ' + orientacion;
+    document.getElementById("comandos").innerHTML = "Comandos:" + direcciones;
+    document.getElementById("posicion_final").innerHTML = "Posicion Final:" + posicionFinal[0] + ',' + posicionFinal[1] + ' ' + orientacionFinal;
 
-    alert(moverAuto(posicionInicial, orientacion, tamGrid, direcciones) + ' ' + girarAuto(posicionInicial, orientacion, tamGrid, direcciones));
     //+ " " + posicionInicial + " " + tamGrid
 }
 
