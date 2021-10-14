@@ -88,6 +88,32 @@ function avanzar(posicionInicial, orientacion, mapa) {
     return res;
 }
 
+function saltar(posicionInicial, orientacion, mapa) {
+    var mov;
+    var res;
+    if (orientacion == "N")
+        mov = [0, 2];
+    else if (orientacion == "S")
+        mov = [0, -2];
+    else if (orientacion == "E")
+        mov = [2, 0];
+    else if (orientacion == "O")
+        mov = [-2, 0];
+    res = [posicionInicial[0] + mov[0], posicionInicial[1] + mov[1]];
+    if (res[0] < 0)
+        res[0] = 0;
+    if (res[0] > mapa[0])
+        res[0] = mapa[0];
+
+    if (res[1] < 0)
+        res[1] = 0;
+    if (res[1] > mapa[1])
+        res[1] = mapa[1];
+
+    return res;
+}
+
+
 function moverAuto(posicionInicial, orientacion, mapa, movimientos) {
     for (var x = 0; x < movimientos.length; x++) {
         if (movimientos.charAt(x) == "D")
@@ -96,7 +122,8 @@ function moverAuto(posicionInicial, orientacion, mapa, movimientos) {
             orientacion = girarIzq(orientacion);
         if (movimientos.charAt(x) == "A")
             posicionInicial = avanzar(posicionInicial, orientacion, mapa);
-
+        if (movimientos.charAt(x) == "S")
+            posicionInicial = saltar(posicionInicial, orientacion, mapa);
     }
     return posicionInicial;
 }
@@ -109,7 +136,8 @@ function girarAuto(posicionInicial, orientacion, mapa, movimientos) {
             orientacion = girarIzq(orientacion);
         if (movimientos.charAt(x) == "A")
             posicionInicial = avanzar(posicionInicial, orientacion, mapa);
-
+        if (movimientos.charAt(x) == "S")
+            posicionInicial = saltar(posicionInicial, orientacion, mapa);
     }
     return orientacion;
 }

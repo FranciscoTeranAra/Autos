@@ -51,7 +51,34 @@ describe("La direccion debe ser correcta", () => {
         expect(girarDer("E")).toEqual("S");
     });
 });
+//---------------------------------------------------------------------------
+function saltar(posicionInicial, orientacion, mapa) {
+    var mov;
+    var res;
+    if (orientacion == "N")
+        mov = [0, 2];
+    else if (orientacion == "S")
+        mov = [0, -2];
+    else if (orientacion == "E")
+        mov = [2, 0];
+    else if (orientacion == "O")
+        mov = [-2, 0];
+    res = [posicionInicial[0] + mov[0], posicionInicial[1] + mov[1]];
+    if (res[0] < 0)
+        res[0] = 0;
+    if (res[0] > mapa[0])
+        res[0] = mapa[0];
 
+    if (res[1] < 0)
+        res[1] = 0;
+    if (res[1] > mapa[1])
+        res[1] = mapa[1];
+
+    return res;
+}
+
+
+//---------------------------------------------------------------------------
 function avanzar(posicionInicial, orientacion, mapa) {
     var mov;
     var res;
@@ -121,6 +148,8 @@ function moverAuto(posicionInicial, orientacion, mapa, movimientos) {
             orientacion = girarIzq(orientacion);
         if (movimientos.charAt(x) == "A")
             posicionInicial = avanzar(posicionInicial, orientacion, mapa);
+        if (movimientos.charAt(x) == "S")
+            posicionInicial = saltar(posicionInicial, orientacion, mapa);
 
     }
     return posicionInicial;
@@ -130,12 +159,12 @@ describe("El punto final del coche debe ser correcta", () => {
     var posicion2 = [2, 2];
     var posicion3 = [5, 5];
     var posicion4 = [7, 7];
-    var resultado1 = [0, 3];
+    var resultado1 = [0, 4];
     var resultado2 = [3, 3];
     var resultado3 = [7, 6];
     var resultado4 = [0, 0];
     it("Debe llegar a su destino correcto", () => {
-        expect(moverAuto(posicion1, 'N', posicion3, 'AAA')).toEqual(resultado1);
+        expect(moverAuto(posicion1, 'N', posicion3, 'AAS')).toEqual(resultado1);
     });
     it("Debe llegar a su destino correcto", () => {
         expect(moverAuto(posicion2, 'S', posicion3, 'IAIA')).toEqual(resultado2);
