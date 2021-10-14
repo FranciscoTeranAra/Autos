@@ -1,6 +1,9 @@
 const cantidad = document.querySelector("#main-input");
 const form = document.querySelector("#auto-form");
-
+const div = document.querySelector("#resultado-div");
+let posI;
+let com;
+let posF;
 
 function myFunction() {
     var text = document.getElementById("main-input").value;
@@ -17,12 +20,9 @@ function myFunction() {
     posicionInicial[1] = parseInt(posicionInicial[1]);
     var posicionFinal = moverAuto(posicionInicial, orientacion, tamGrid, direcciones);
     var orientacionFinal = girarAuto(posicionInicial, orientacion, tamGrid, direcciones);
-    //alert(posicionFinal[0] + ',' + posicionFinal[1] + ' ' + orientacionFinal)
-    document.getElementById("posicion_inicial").innerHTML = "Posicion Inicial:" + posicionInicial[0] + ',' + posicionInicial[1] + ' ' + orientacion;
-    document.getElementById("comandos").innerHTML = "Comandos:" + direcciones;
-    document.getElementById("posicion_final").innerHTML = "Posicion Final:" + posicionFinal[0] + ',' + posicionFinal[1] + ' ' + orientacionFinal;
-
-    //+ " " + posicionInicial + " " + tamGrid
+    posI = posicionInicial[0] + ',' + posicionInicial[1] + ' ' + orientacion;
+    com = direcciones;
+    posF = posicionFinal[0] + ' ' + posicionFinal[1] + ',' + orientacionFinal;
 }
 
 function fixOrientacion(posicionInicial) {
@@ -31,13 +31,6 @@ function fixOrientacion(posicionInicial) {
 
 function separarSlash(str, separador) {
     var res = [];
-    /*var rest = str.substring(0, str.lastIndexOf("/"));
-    var last = str.substring(str.lastIndexOf("/") + 1, str.length);
-    res.push(last);
-    rest = rest.substring(0, rest.lastIndexOf("/"));
-    last = rest.substring(rest.lastIndexOf("/") + 1, rest.length);
-    res.push(last);
-    res.push(rest);*/
     res = str.split(separador);
     return res;
 }
@@ -120,4 +113,10 @@ function girarAuto(posicionInicial, orientacion, mapa, movimientos) {
     }
     return orientacion;
 }
-//export default myFunction;
+form.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+    let respuestaFinal = "La posicion inicial es:" + posI.toString() + " <br/> La lista de comandos es: " + com.toString() + "<br/>La posicion Final es: " + posF.toString();
+    div.innerHTML = "<p>" + respuestaFinal + "</p>";
+
+});
